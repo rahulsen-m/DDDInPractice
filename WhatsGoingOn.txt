@@ -1,13 +1,6 @@
-- In this commit we are doing some re-factor
-- After designing the property of the SnackMacine we found the all the property is relates to money 
-- so we created a Money class and separate out all the money related properties from SnackMachine and moved them to Money class.
-    public int OneCentCount { get; private set; }
-    public int TenCentCount { get; private set; }
-    public int QuarterCount { get; private set; }
-    public int OneDollerCount { get; private set; }
-    public int FiveDollerCount { get; private set; }
-    public int TwentyDollerCount { get; private set; }
-- Then we re-factor the Snack machine class by adding two new property
-    public Money MoneyInside { get; private set; }
-    public Money MoneyInTransaction { get; private set; }
-- Used this new properties to track the transaction
+- In this commit we are introducing the concept of base entity and understand about value object
+- In the base entity abstract class we override the equal operator for comparing the two object
+- and we also override == operator
+- If we override == operator then we must override the != operator
+- Lastly we also override the GetHash code. This will return the hash code of the object
+- Finally we inherited the Entity class to the SnackMachine class

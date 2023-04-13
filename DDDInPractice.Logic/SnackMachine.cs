@@ -1,7 +1,7 @@
 ﻿namespace DDDInPractice.Logic;
 
 // creating a sealed class so that this class can not be inherited
-public sealed class SnackMachine
+public sealed class SnackMachine : Entity
 {
     public Money MoneyInside { get; private set; }
     public Money MoneyInTransaction { get; private set; }
