@@ -1,0 +1,13 @@
+- In this commit we are doing some re-factor
+- After designing the property of the SnackMacine we found the all the property is relates to money 
+- so we created a Money class and separate out all the money related properties from SnackMachine and moved them to Money class.
+    public int OneCentCount { get; private set; }
+    public int TenCentCount { get; private set; }
+    public int QuarterCount { get; private set; }
+    public int OneDollerCount { get; private set; }
+    public int FiveDollerCount { get; private set; }
+    public int TwentyDollerCount { get; private set; }
+- Then we re-factor the Snack machine class by adding two new property
+    public Money MoneyInside { get; private set; }
+    public Money MoneyInTransaction { get; private set; }
+- Used this new properties to track the transaction
