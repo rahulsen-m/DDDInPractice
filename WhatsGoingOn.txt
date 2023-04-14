@@ -1,6 +1,4 @@
-- In this commit we created a unit test project 
-- We added first test for Snack Machine
-- We write the code for return money by setting all property value to 0
-- Re-factored the code by adding new static readonly field for reuse.
-
-    public static readonly Money None = new Money(0, 0, 0, 0, 0, 0);
+- In this commit we added readonly static field for each coin and note 
+- using c# new feature we added the static class reference in the file and using the readonly property directly.
+using static DDDInPractice.Logic.Money;
+so instead of writing Money.None this will only become None as we added the static using statement

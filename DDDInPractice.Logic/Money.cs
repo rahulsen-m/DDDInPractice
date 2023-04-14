@@ -5,6 +5,19 @@
 // so we create abstraction for Money class
 public sealed class Money : ValueObject<Money>
 {
+    //instead of writing several time ( in test and other part of the application)
+    // new Money(0, 0, 0, 0, 0, 0)
+    // we can create a new read-only static field for that
+    public static readonly Money None = new Money(0, 0, 0, 0, 0, 0);
+
+    // here we are creating field for each coin and note
+    public static readonly Money Cent = new Money(1, 0, 0, 0, 0, 0);
+    public static readonly Money TenCent = new Money(0, 1, 0, 0, 0, 0);
+    public static readonly Money Quarter = new Money(0, 0, 1, 0, 0, 0);
+    public static readonly Money Dollar = new Money(0, 0, 0, 1, 0, 0);
+    public static readonly Money FiveDollar = new Money(0, 0, 0, 0, 1, 0);
+    public static readonly Money TwentyDollar = new Money(0, 0, 0, 0, 0, 1);
+
     public int OneCentCount { get; }
     public int TenCentCount { get; }
     public int QuarterCount { get; }

@@ -1,4 +1,5 @@
-﻿namespace DDDInPractice.Logic;
+﻿using static DDDInPractice.Logic.Money;
+namespace DDDInPractice.Logic;
 
 // creating a sealed class so that this class can not be inherited
 public sealed class SnackMachine : Entity
@@ -9,8 +10,8 @@ public sealed class SnackMachine : Entity
     // we need to initialize the MoneyInside, MoneyInTransaction before using that
     public SnackMachine()
     {
-        MoneyInside = new Money(0, 0, 0, 0, 0, 0);
-        MoneyInTransaction = new Money(0, 0, 0, 0, 0, 0);
+        MoneyInside = None;
+        MoneyInTransaction = None;
     }
 
     // here we are adding separate properties
@@ -45,7 +46,7 @@ public sealed class SnackMachine : Entity
         // when user will ask to return the money from the snack machine 
         // the all used transaction properties will be set to 0
         //MoneyInTransaction = 0;
-        MoneyInTransaction = new Money(0, 0, 0, 0, 0, 0);
+        MoneyInTransaction = None;
     }
 
     /// <summary>
