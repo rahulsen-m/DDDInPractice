@@ -1,0 +1,5 @@
+- In this commit Added two new test for snack machine
+- remove the snack machine contractor and initialize the values directly
+
+public Money MoneyInside { get; private set; } = None;
+public Money MoneyInTransaction { get; private set; } = None;
