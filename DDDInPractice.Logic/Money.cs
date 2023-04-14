@@ -3,7 +3,7 @@
 // Which designing the snack machine class 
 // we found that all the notion is related to money
 // so we create abstraction for Money class
-public sealed class Money
+public sealed class Money : ValueObject<Money>
 {
     public int OneCentCount { get; set; }
     public int TenCentCount { get; set; }
@@ -55,5 +55,33 @@ public sealed class Money
             money1.FiveDollerCount + money2.FiveDollerCount,
             money1.TwentyDollerCount + money2.TwentyDollerCount);
         return sum;
+    }
+
+    protected override bool EqualCore(Money other) => 
+        OneCentCount == other.OneCentCount 
+        && TenCentCount == other.TenCentCount
+        && QuarterCount == other.QuarterCount
+        && OneDollerCount == other.OneDollerCount
+        && FiveDollerCount == other.FiveDollerCount
+        && TwentyDollerCount== other.TwentyDollerCount;
+
+    protected override int GetHashCodeCore()
+    {
+        //The method then initializes an integer variable called "hashCode"
+        //with the value of the "OneCentCount" property.
+        //The following lines of code use a bitwise XOR operation to combine the hash code
+        //with the values of the other properties, multiplying each value by
+        //a prime number (397) before XOR-ing it with the hash code.
+        //This is a common algorithm for generating hash codes in .NET.
+        unchecked
+        {
+            int hashCode = OneCentCount;
+            hashCode = (hashCode * 397) ^ TenCentCount;
+            hashCode = (hashCode * 397) ^ QuarterCount;
+            hashCode = (hashCode * 397) ^ OneDollerCount;
+            hashCode = (hashCode * 397) ^ FiveDollerCount;
+            hashCode = (hashCode * 397) ^ TwentyDollerCount;
+            return hashCode;
+        }
     }
 }

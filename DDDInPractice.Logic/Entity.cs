@@ -34,14 +34,7 @@ public abstract class Entity
         return a.Equals(b);
     }
 
-    public static bool operator !=(Entity a, Entity b)
-    {
-        return !(a == b);
-    }
-    
-    public override int GetHashCode()
-    {
-        return (GetType().ToString() + Id).GetHashCode();
-    
-    }
+    public static bool operator !=(Entity a, Entity b) => !(a == b);
+
+    public override int GetHashCode() => (GetType().ToString() + Id).GetHashCode();
 }
