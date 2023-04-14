@@ -6,6 +6,13 @@ public sealed class SnackMachine : Entity
     public Money MoneyInside { get; private set; }
     public Money MoneyInTransaction { get; private set; }
 
+    // we need to initialize the MoneyInside, MoneyInTransaction before using that
+    public SnackMachine()
+    {
+        MoneyInside = new Money(0, 0, 0, 0, 0, 0);
+        MoneyInTransaction = new Money(0, 0, 0, 0, 0, 0);
+    }
+
     // here we are adding separate properties
     // as we need to somehow distinguish the money is in the snack machine 
     // and the money we need to return 
@@ -38,6 +45,7 @@ public sealed class SnackMachine : Entity
         // when user will ask to return the money from the snack machine 
         // the all used transaction properties will be set to 0
         //MoneyInTransaction = 0;
+        MoneyInTransaction = new Money(0, 0, 0, 0, 0, 0);
     }
 
     /// <summary>

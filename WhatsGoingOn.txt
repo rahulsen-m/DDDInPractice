@@ -1,6 +1,6 @@
 - In this commit we created a unit test project 
-- We test different functionality related to money class
-- Modified money class for not accepting negative value
-- Added new property which will calculate the total amount
-- we make the money class property to only getter
-- Used expression body for Amount property , which is also only getter
+- We added first test for Snack Machine
+- We write the code for return money by setting all property value to 0
+- Re-factored the code by adding new static readonly field for reuse.
+
+    public static readonly Money None = new Money(0, 0, 0, 0, 0, 0);
