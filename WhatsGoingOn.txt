@@ -1,6 +1,6 @@
-- In this commit we are introducing the concept of base entity and understand about value object
-- In the base entity abstract class we override the equal operator for comparing the two object
-- and we also override == operator
-- If we override == operator then we must override the != operator
-- Lastly we also override the GetHash code. This will return the hash code of the object
-- Finally we inherited the Entity class to the SnackMachine class
+- In this commit we created a unit test project 
+- We test different functionality related to money class
+- Modified money class for not accepting negative value
+- Added new property which will calculate the total amount
+- we make the money class property to only getter
+- Used expression body for Amount property , which is also only getter

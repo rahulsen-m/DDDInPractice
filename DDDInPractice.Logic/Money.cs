@@ -5,12 +5,20 @@
 // so we create abstraction for Money class
 public sealed class Money : ValueObject<Money>
 {
-    public int OneCentCount { get; set; }
-    public int TenCentCount { get; set; }
-    public int QuarterCount { get; set; }
-    public int OneDollerCount { get; set; }
-    public int FiveDollerCount { get; set; }
-    public int TwentyDollerCount { get; set; }
+    public int OneCentCount { get; }
+    public int TenCentCount { get; }
+    public int QuarterCount { get; }
+    public int OneDollarCount { get; }
+    public int FiveDollarCount { get;}
+    public int TwentyDollarCount { get; }
+
+    public decimal Amount =>
+        OneCentCount * 0.01m +
+        TenCentCount * 0.10m +
+        QuarterCount * 0.25m +
+        OneDollarCount +
+        FiveDollarCount * 5 +
+        TwentyDollarCount * 20;
 
     /// <summary>
     /// Initializes money class using the constructor
@@ -28,13 +36,16 @@ public sealed class Money : ValueObject<Money>
                  int fiveDollerCount,
                  int twentyDollerCount)
     {
+        // we are not allowing th negative money
+        if(oneCentCount < 0 || tenCentCount < 0 || quarterCount < 0 || oneDollerCount < 0 || fiveDollerCount < 0 || twentyDollerCount < 0)
+            throw new InvalidOperationException();
         // here we are tracking what money is the user is using in the transaction
         OneCentCount = oneCentCount;
         TenCentCount = tenCentCount;
         QuarterCount = quarterCount;
-        OneDollerCount = oneDollerCount;
-        FiveDollerCount = fiveDollerCount;
-        TwentyDollerCount = twentyDollerCount;
+        OneDollarCount = oneDollerCount;
+        FiveDollarCount = fiveDollerCount;
+        TwentyDollarCount = twentyDollerCount;
     }
 
     /// <summary>
@@ -51,19 +62,28 @@ public sealed class Money : ValueObject<Money>
             money1.OneCentCount + money2.OneCentCount,
             money1.TenCentCount + money2.TenCentCount,
             money1.QuarterCount + money2.QuarterCount,
-            money1.OneDollerCount + money2.OneDollerCount,
-            money1.FiveDollerCount + money2.FiveDollerCount,
-            money1.TwentyDollerCount + money2.TwentyDollerCount);
+            money1.OneDollarCount + money2.OneDollarCount,
+            money1.FiveDollarCount + money2.FiveDollarCount,
+            money1.TwentyDollarCount + money2.TwentyDollarCount);
         return sum;
     }
+
+    public static Money operator -(Money money1, Money money2) =>
+        new Money(
+            money1.OneCentCount - money2.OneCentCount,
+            money1.TenCentCount - money2.TenCentCount,
+            money1.QuarterCount - money2.QuarterCount,
+            money1.OneDollarCount - money2.OneDollarCount,
+            money1.FiveDollarCount - money2.FiveDollarCount,
+            money1.TwentyDollarCount - money2.TwentyDollarCount);
 
     protected override bool EqualCore(Money other) => 
         OneCentCount == other.OneCentCount 
         && TenCentCount == other.TenCentCount
         && QuarterCount == other.QuarterCount
-        && OneDollerCount == other.OneDollerCount
-        && FiveDollerCount == other.FiveDollerCount
-        && TwentyDollerCount== other.TwentyDollerCount;
+        && OneDollarCount == other.OneDollarCount
+        && FiveDollarCount == other.FiveDollarCount
+        && TwentyDollarCount== other.TwentyDollarCount;
 
     protected override int GetHashCodeCore()
     {
@@ -78,9 +98,9 @@ public sealed class Money : ValueObject<Money>
             int hashCode = OneCentCount;
             hashCode = (hashCode * 397) ^ TenCentCount;
             hashCode = (hashCode * 397) ^ QuarterCount;
-            hashCode = (hashCode * 397) ^ OneDollerCount;
-            hashCode = (hashCode * 397) ^ FiveDollerCount;
-            hashCode = (hashCode * 397) ^ TwentyDollerCount;
+            hashCode = (hashCode * 397) ^ OneDollarCount;
+            hashCode = (hashCode * 397) ^ FiveDollarCount;
+            hashCode = (hashCode * 397) ^ TwentyDollarCount;
             return hashCode;
         }
     }
