@@ -4,15 +4,16 @@ namespace DDDInPractice.Logic;
 // creating a sealed class so that this class can not be inherited
 public sealed class SnackMachine : Entity
 {
-    public Money MoneyInside { get; private set; }
-    public Money MoneyInTransaction { get; private set; }
+    public Money MoneyInside { get; private set; } = None;
+    public Money MoneyInTransaction { get; private set; } = None;
 
     // we need to initialize the MoneyInside, MoneyInTransaction before using that
-    public SnackMachine()
-    {
-        MoneyInside = None;
-        MoneyInTransaction = None;
-    }
+    //public SnackMachine()
+    //{
+    //    // we can directly initialize this without adding this into constructor
+    //    MoneyInside = None;
+    //    MoneyInTransaction = None;
+    //}
 
     // here we are adding separate properties
     // as we need to somehow distinguish the money is in the snack machine 
@@ -30,10 +31,14 @@ public sealed class SnackMachine : Entity
     /// <summary>
     /// Inserts the money to the snack machine
     /// </summary>
-    /// <param name="oneCentCount">The one cent count.</param>
-    
+    /// <param name="money">The money object.</param>
+
     public void InsertMoney(Money money)
     {
+        // we need to consider only one coin or dollar
+        Money[] consAndNotes = { Cent, TenCent, Quarter, Dollar, FiveDollar, TwentyDollar };
+        if (!consAndNotes.Contains(money))
+            throw new InvalidOperationException();
         // here we are tracking what money is the user is using in the transaction
         MoneyInTransaction += money;
     }
@@ -58,6 +63,7 @@ public sealed class SnackMachine : Entity
         // we will be store the money to machine
         // using the transaction amount
         MoneyInside += MoneyInTransaction;
+        MoneyInTransaction = None;
 
         // after adding the transaction value we need to reset the transaction value
         //MoneyInTransaction = 0;

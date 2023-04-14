@@ -1,4 +1,5 @@
-- In this commit we added readonly static field for each coin and note 
-- using c# new feature we added the static class reference in the file and using the readonly property directly.
-using static DDDInPractice.Logic.Money;
-so instead of writing Money.None this will only become None as we added the static using statement
+- In this commit Added two new test for snack machine
+- remove the snack machine contractor and initialize the values directly
+
+public Money MoneyInside { get; private set; } = None;
+public Money MoneyInTransaction { get; private set; } = None;
